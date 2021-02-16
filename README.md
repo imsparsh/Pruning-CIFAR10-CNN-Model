@@ -1,2 +1,7 @@
 # Pruning CIFAR10 CNN Model
  We have trained a CNN model for CIFAR10 dataset and pruned the model using tensorflow_model_optimization library. 
+
+A custom CNN based neural network model has been developed for CIFAR dataset using 6 Convolution layers, along with MaxPooling and Dropout layers to generalize the model and finally 2 Dense layers at the end to classify the output among 10 classes using softmax activation function. The model has around 1.6M parameters and compiled the model using Adam optimizer that uses adaptive momentum and sparse categorical cross-entropy loss function has been used for calculating the loss to conduct batch gradient descent in order to minimize the loss between actual and predicted output. Also, the validation test is done on 10% of the training data and the model was trained for 25 epochs and we achieved the accuracy of 81.91% on test data.
+
+Further, the tensorflow_model_optimization library has been used for pruning the model by turning off the model weights to 0 in prune_low_magnitude function that has been used for converting the model layers to pruned layers which controls the sparsity of the layer weights and the model has been again trained with pruning, with the minimum sparsity of 50% and the maximum sparsity of 80% for 10 epochs. The accuracy after pruning came out to be 84.17% for test data. Following which applied strip_pruning function to remove the masked weights and reduce the size of the model. The size of the model changed from 20MB to 7MB with around 2.2% increase in accuracy of the model on test data.
+
